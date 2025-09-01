@@ -87,15 +87,38 @@ if [ -f /google/devshell/bashrc.google ]; then
 fi
 
 # 3. Comprobación e instalación automática del entorno de desarrollo
-#    Verifica si el entorno está instalado (buscando 'terraform').
-#    Si no lo está, ejecuta el script de instalación una única vez.
-if ! command -v zoxide &> /dev/null; then
+#    Verifica si el entorno ya fue instalado usando un archivo de control (lock file).
+#    Si no, ejecuta el script de instalación y crea el archivo de control al terminar con éxito.
+
+# --- INICIO: Lógica robusta para encontrar la ruta real del script de instalación ---
+# Esto es necesario porque .bashrc es un enlace simbólico (symlink).
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # Resuelve $SOURCE hasta que ya no sea un enlace simbólico.
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  # Si $SOURCE era un enlace simbólico relativo, resolverlo relativo a la ruta del enlace.
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+setup_script_path="$SCRIPT_DIR/setup_dev_tools.sh"
+# --- FIN: Lógica robusta ---
+
+ENTORNO_UNO_LOCK_FILE="$HOME/.entorno-uno-instalado"
+if [ ! -f "$ENTORNO_UNO_LOCK_FILE" ]; then
     echo "Entorno de desarrollo no detectado. Ejecutando configuración única..."
     echo "Esto puede tardar varios minutos. Las futuras terminales iniciarán al instante."
-    if [ -f "/home/hcano_personal/setup_dev_tools.sh" ]; then
-        bash "$(dirname "${BASH_SOURCE[0]}")/setup_dev_tools.sh"
+
+    if [ -f "$setup_script_path" ]; then
+        # Ejecuta el script y, si tiene éxito (código de salida 0), crea el archivo de control.
+        if bash "$setup_script_path"; then
+            touch "$ENTORNO_UNO_LOCK_FILE"
+            echo "Instalación completada y bandera creada en '$ENTORNO_UNO_LOCK_FILE'."
+            echo "Para forzar una reinstalación o reparación, borra ese archivo y abre una nueva terminal."
+        else
+            echo "ADVERTENCIA: El script de instalación falló. La bandera no se creará." >&2
+        fi
     else
-        echo "ERROR: No se encontró el script de instalación en /home/hcano_personal/setup_dev_tools.sh"
+        echo "ERROR CRÍTICO: No se encontró el script de instalación en '$setup_script_path'." >&2
     fi
 fi
 
@@ -117,3 +140,11 @@ eval "$(zoxide init bash)"
 # 7. Habilitar starship (prompt moderno)
 #    Reemplaza el prompt de bash por uno más informativo y estético.
 eval "$(starship init bash)"
+
+# 8. Cargar NVM (Node Version Manager)
+#    Esto permite usar 'nvm', 'node' y 'npm' en la terminal.
+#    Debe cargarse después de cualquier instalación automática.
+export NVM_DIR="$HOME/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  \. "$NVM_DIR/nvm.sh"  # Carga NVM
+fi
