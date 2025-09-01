@@ -1,4 +1,7 @@
 #!/bin/bash
+# Hace que el script termine inmediatamente si un comando falla.
+set -e
+
 # ==============================================================================
 # INSTALADOR DE ENTORNO DE DESARROLLO
 #
@@ -15,15 +18,15 @@ echo "Iniciando la configuración del entorno de desarrollo..."
 echo "Preparando el sistema base..."
 
 # Suprime el warning de apt-get en Cloud Shell
-mkdir -p /home/hcano_personal/.cloudshell
-touch /home/hcano_personal/.cloudshell/no-apt-get-warning
+mkdir -p "$HOME/.cloudshell"
+touch "$HOME/.cloudshell/no-apt-get-warning"
 
 # Restaura el sistema a su estado completo si no se ha hecho antes
-if [ ! -f "/home/hcano_personal/.unminimize_complete" ]; then
+if [ ! -f "$HOME/.unminimize_complete" ]; then
     echo "Restaurando paquetes y documentación del sistema (operación única)..."
     DEBIAN_FRONTEND=noninteractive sudo unminimize -f
     echo "Sistema restaurado."
-    touch "/home/hcano_personal/.unminimize_complete"
+    touch "$HOME/.unminimize_complete"
 else
     echo "El sistema ya está completo. Omitiendo."
 fi
@@ -62,7 +65,6 @@ sudo apt-get update
 sudo apt-get install -y \
     apt-utils \
     build-essential man-db tldr htop net-tools dnsutils plocate tree zip unzip wget \
-
     tmux zsh fish fzf ripgrep jq bat vim emacs nmap iotop sysstat ansible \
     docker-compose postgresql-client mysql-client redis-tools mongodb-mongosh \
     python3-pip eza zoxide
