@@ -65,7 +65,7 @@ sudo apt-get install -y \
 
     tmux zsh fish fzf ripgrep jq bat vim emacs nmap iotop sysstat ansible \
     docker-compose postgresql-client mysql-client redis-tools mongodb-mongosh \
-    python3-pip nodejs eza zoxide
+    python3-pip eza zoxide
 
 # Paquetes de repositorios externos
 if ! command -v terraform &> /dev/null; then sudo apt-get install -y terraform; fi
@@ -100,7 +100,7 @@ fi
 # dive
 if ! command -v dive &> /dev/null; then
     echo "Instalando dive..."
-    DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^\"]+)".*/\1/')
+    DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
     curl -L -o dive.deb "https://github.com/wagoodman/dive/releases/latest/download/dive_${DIVE_VERSION}_linux_amd64.deb"
     sudo apt install -y ./dive.deb
     rm dive.deb
@@ -111,6 +111,27 @@ if ! command -v starship &> /dev/null; then
     echo "Instalando starship prompt..."
     curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
 fi
+
+# --- Parte 4: Configuración de Node.js con NVM ---
+# Se instala Node.js usando NVM (Node Version Manager) para asegurar que se
+# utiliza la versión más reciente y estable (LTS), evitando conflictos con
+# las versiones antiguas de los repositorios de sistema.
+
+echo "Instalando la última versión LTS de Node.js a través de NVM..."
+
+export NVM_DIR="$HOME/.nvm"
+# Instalar NVM (si no está ya instalado)
+if [ ! -s "$NVM_DIR/nvm.sh" ]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+fi
+
+# Cargar NVM en la sesión actual del script para poder usarlo
+\. "$NVM_DIR/nvm.sh"
+
+# Instalar y usar la versión LTS más reciente de Node.js
+nvm install --lts
+nvm use --lts
+nvm alias default lts/*
 
 echo "Configuración del entorno de desarrollo finalizada."
 
