@@ -60,7 +60,9 @@ sudo apt-get update
 
 # Paquetes estándar
 sudo apt-get install -y \
+    apt-utils \
     build-essential man-db tldr htop net-tools dnsutils plocate tree zip unzip wget \
+
     tmux zsh fish fzf ripgrep jq bat vim emacs nmap iotop sysstat ansible \
     docker-compose postgresql-client mysql-client redis-tools mongodb-mongosh \
     python3-pip nodejs eza zoxide
