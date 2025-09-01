@@ -89,7 +89,7 @@ fi
 # 3. Comprobación e instalación automática del entorno de desarrollo
 #    Verifica si el entorno está instalado (buscando 'terraform').
 #    Si no lo está, ejecuta el script de instalación una única vez.
-if ! command -v terraform &> /dev/null; then
+if ! command -v zoxide &> /dev/null; then
     echo "Entorno de desarrollo no detectado. Ejecutando configuración única..."
     echo "Esto puede tardar varios minutos. Las futuras terminales iniciarán al instante."
     if [ -f "/home/hcano_personal/setup_dev_tools.sh" ]; then
