@@ -43,11 +43,14 @@ source ~/.bashrc
 
 ### 📂 Estructura del Repositorio
 
-Para navegar este proyecto, es útil entender el propósito de cada archivo clave:
-
-*   `setup_dev_tools.sh`: Es el corazón del proyecto. Este script se encarga de instalar todas las herramientas de software, CLIs, y gestores de paquetes. Es el script principal que aprovisiona el entorno.
-*   `install.sh`: Este script se enfoca en la configuración del entorno de la terminal (shell). Crea enlaces simbólicos para archivos de configuración como `.bashrc`, permitiendo que tu terminal adopte la personalización definida en el repositorio.
-*   `.bashrc`: Es el archivo de configuración para la shell Bash. En este proyecto, está personalizado para cargar herramientas como Starship y NVM, y para definir alias y funciones que agilizan el flujo de trabajo.
+```
+📁 entorno-uno-linux/
+├── 📜 .bashrc               # Configuración de la shell Bash (alias, funciones, carga de NVM).
+├── 🚀 install.sh             # Script que enlaza los 'dotfiles' (como .bashrc) a tu home.
+├── 🛠️ setup_dev_tools.sh      # Script principal que instala todas las herramientas y paquetes.
+├── 📄 LICENSE               # Licencia del proyecto (MIT).
+└── 📖 README.md             # Este archivo que estás leyendo.
+```
 
 ---
 
