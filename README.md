@@ -198,7 +198,6 @@ Este es un proyecto en constante evolución. Las contribuciones y sugerencias so
 
 Para un contacto más directo, puedes encontrarme en:
 *   **Discord:** `hcano.109`
-*   **Email:** `[tu-correo-electronico@ejemplo.com]` (Por favor, reemplaza esto con tu email real)
 
 ### 📜 Licencia
 
