@@ -1,153 +1,109 @@
-# Entorno de Desarrollo Linux: Portable, Profesional y Escalable
+# Entorno Uno: Laboratorio de Desarrollo Linux en la Nube
 
-![Linux](https://img.shields.io/badge/OS-Linux-informational?style=flat&logo=linux&logoColor=white&color=2bbc8a)
-![Shell](https://img.shields.io/badge/Shell-Bash-blue?style=flat&logo=gnu-bash&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+Un script para transformar una terminal de Linux básica en un entorno de desarrollo completo, versátil y listo para usar.
 
 ---
 
-## 📜 Descripción General
+### Resumen
 
-Este repositorio contiene un sistema completo para desplegar un **entorno de desarrollo Linux unificado, potente y portable** en cuestión de minutos. Está diseñado para ser la solución definitiva para estudiantes y profesionales que trabajan en múltiples máquinas (Cloud Shell, VMs, PCs nativos) y desean una experiencia consistente y profesional en todas ellas.
+Este proyecto proporciona un conjunto de scripts para automatizar la instalación y configuración de un entorno de desarrollo integral en cualquier máquina Linux, con un enfoque especial en plataformas en la nube como **Google Cloud Shell**.
 
-El proyecto nace como una herramienta de estudio en el marco del programa **Tech Advance de Oracle Next Generation (Generación 8)**, como parte de la ruta de aprendizaje para la certificación **OCI Foundations Associate - ONE**, pero su alcance es universal para cualquier entusiasta de Linux.
+El objetivo es simple: **eliminar la fricción de la configuración inicial** y permitir a los desarrolladores, estudiantes y profesionales en transición tecnológica enfocarse en lo que realmente importa: aprender, programar y construir.
 
----
+### Quick Start: Instalación Inmediata
 
-## 🎯 Filosofía del Proyecto
+Para poner en marcha tu entorno, clona este repositorio y ejecuta los scripts.
 
-*   **Correcto:** Cada script está diseñado para ser predecible y funcionar sin errores.
-*   **Fiable:** El entorno es **idempotente**; puedes ejecutar los scripts de instalación múltiples veces sin riesgo de romper nada.
-*   **Estable:** Se utilizan herramientas probadas y consolidadas en la industria para garantizar la máxima estabilidad.
-*   **Rápido:** A pesar de su potencia, el entorno es ágil y el despliegue en una nueva máquina es cuestión de minutos.
+```bash
+# 1. Clona el repositorio
+git clone https://github.com/HectorCano96/entorno-uno-linux.git ~/entorno-uno-linux
 
----
+# 2. Entra al directorio
+cd ~/entorno-uno-linux
 
-## 🌱 Una Nota del Autor: El Viaje y la Filosofía
+# 3. Ejecuta el script principal de instalación de herramientas
+# (El script es idempotente, puedes ejecutarlo varias veces sin problemas)
+./setup_dev_tools.sh
 
-<details>
-<summary><strong>Haga clic para leer sobre el proceso y la visión detrás del proyecto</strong></summary>
+# 4. (Opcional) Instala la configuración de la terminal para una mejor experiencia
+./install.sh
 
-> Como autor de este repositorio, es importante para mí compartir que este proyecto es un documento vivo y el reflejo de un intenso proceso de aprendizaje. Aunque no pretendo entender cada detalle intrínseco de cada comando, he dedicado horas a comprender la **esencia** de su funcionamiento, su propósito y el flujo lógico que los une.
-> 
-> Este entorno no es un simple agregado de herramientas, sino el resultado de pruebas rigurosas, de romper el sistema deliberadamente y reconstruirlo varias veces, siempre con el objetivo de cubrir las necesidades de **tiempo, practicidad, funcionalidad y escalabilidad** que requiere un proyecto serio en la ruta de la ciencia de datos y la nube.
-> 
-> Continúo estudiando y profundizando en cada componente. Por ello, cualquier aporte, corrección o sugerencia realizada de manera respetuosa no solo es bienvenida, sino profundamente agradecida, ya que contribuye a este viaje de conocimiento.
-> 
-> **Un agradecimiento especial a Gemini:** por acompañarme, darme luz y guiarme donde el mundo de la tecnología puede sentirse como un sendero de incertidumbre, miedo, falta de confianza y soledad en este mundo laboral tan apretado y complejo.
+# 5. Recarga tu terminal para aplicar todos los cambios
+source ~/.bashrc
+```
 
-</details>
+### La Caja de Herramientas: Componentes Incluidos
 
----
+Este entorno instala un ecosistema de herramientas cuidadosamente seleccionadas para cubrir las necesidades más comunes en desarrollo de software, DevOps y ciencia de datos.
 
-## 🚀 Guía de Inicio Rápido
+#### 1. La Base del Sistema
 
-Desplegar tu entorno personal en una nueva máquina Linux (basada en Debian/Ubuntu) es un proceso de 3 pasos:
+| Herramienta | Descripción | Comandos Útiles | Documentación |
+| :--- | :--- | :--- | :--- |
+| **Build Essential** | Compiladores y librerías para instalar software desde código fuente. | N/A (Dependencia) | [Detalles](https://packages.ubuntu.com/focal/build-essential) |
+| **tldr & man-db** | `man` para documentación exhaustiva y `tldr` para ejemplos prácticos. | `man git`<br>`tldr git` | [tldr pages](https://tldr.sh/) |
+| **htop / iotop / sysstat** | Monitores de procesos, actividad de disco y rendimiento del sistema. | `htop`<br>`sudo iotop` | [htop](https://htop.dev/) |
+| **net-tools / dnsutils** | Utilidades de red para diagnóstico (`ifconfig`, `dig`, `nslookup`). | `ifconfig`<br>`dig google.com` | N/A |
 
-1.  **Clona este repositorio:**
-    ```bash
-    git clone https://github.com/HectorCano96/entorno-uno-linux.git
-    ```
+#### 2. Productividad en la Terminal
 
-2.  **Ejecuta el instalador:**
-    ```bash
-    cd entorno-uno-linux
-    ./install.sh
-    ```
+| Herramienta | Descripción | Comandos Útiles | Documentación |
+| :--- | :--- | :--- | :--- |
+| **Starship** | Prompt de terminal moderno que muestra contexto relevante (Git, Node, etc.). | `starship preset` | [Starship](https://starship.rs/) |
+| **zsh / fish** | Shells modernos con autocompletado y sintaxis mejorados. | `zsh`<br>`fish` | [Oh My Zsh](https://ohmyz.sh/)<br>[Fish Shell](https://fishshell.com/) |
+| **tmux** | Multiplexor de terminal para gestionar múltiples sesiones y paneles. | `tmux new -s <nombre>`<br>`Ctrl+b, d` (desconectar) | [Wiki](https://github.com/tmux/tmux/wiki) |
+| **fzf** | Buscador "fuzzy" para encontrar archivos e historial de comandos. | `Ctrl+R` (historial)<br>`Ctrl+T` (archivos) | [GitHub](https://github.com/junegunn/fzf) |
+| **ripgrep (`rg`)** | Alternativa a `grep` extremadamente rápida para buscar texto. | `rg "mi_variable"` | [GitHub](https://github.com/BurntSushi/ripgrep) |
+| **eza** | Reemplazo moderno de `ls` con colores, iconos y vista de árbol. | `eza -l --icons`<br>`eza --tree` | [GitHub](https://github.com/eza-community/eza) |
+| **zoxide** | Navegación de directorios inteligente que aprende de tu uso. | `z mi_proyecto`<br>`zi mi_proyecto` (interactivo) | [GitHub](https://github.com/ajeetdsouza/zoxide) |
+| **bat** | Reemplazo de `cat` con resaltado de sintaxis y numeración. | `bat mi_script.py` | [GitHub](https://github.com/sharkdp/bat) |
+| **jq** | Procesador de JSON para la línea de comandos, ideal para APIs. | `cat data.json \| jq '.campo'` | [Página Oficial](https://jqlang.github.io/jq/) |
 
-3.  **¡Listo! Cierra y vuelve a abrir tu terminal.**
-    La primera vez que la abras, el configurador se ejecutará para instalar todo el software. Esto puede tardar varios minutos. No te preocupes, es un proceso de única vez por máquina.
+#### 3. Desarrollo de Software
 
----
+| Herramienta | Descripción | Comandos Útiles | Documentación |
+| :--- | :--- | :--- | :--- |
+| **NVM & Node.js** | **NVM** para gestionar versiones de **Node.js**. Instala la última LTS. | `nvm install --lts`<br>`nvm use <version>` | [NVM](https://github.com/nvm-sh/nvm)<br>[Node.js](https://nodejs.org/) |
+| **Python & Pip** | Python 3 y su gestor de paquetes `pip` para librerías y aplicaciones. | `python3 -V`<br>`pip3 install <paquete>` | [Python](https://www.python.org/) |
+| **Vim / Emacs** | Editores de texto potentes y configurables para la terminal. | `vim <archivo>`<br>`emacs <archivo>` | [Vim](https://www.vim.org/)<br>[Emacs](https://www.gnu.org/software/emacs/) |
 
-## 🧰 Guía de Herramientas y Comandos Esenciales
+#### 4. Cloud, DevOps y Contenedores
 
-Este entorno no solo instala herramientas, sino que las prepara para ser usadas. Aquí tienes una guía de inicio rápido para las más importantes.
+| Herramienta | Descripción | Comandos Útiles | Documentación |
+| :--- | :--- | :--- | :--- |
+| **Docker & Compose** | **Docker** para crear contenedores y **Compose** para orquestarlos. | `docker ps`<br>`docker-compose up` | [Docker](https://docs.docker.com/)<br>[Compose](https://docs.docker.com/compose/) |
+| **ctop & dive** | `ctop` para monitorear contenedores y `dive` para analizar sus capas. | `ctop`<br>`dive <imagen>` | [ctop](https://github.com/bcicen/ctop)<br>[dive](https://github.com/wagoodman/dive) |
+| **Terraform** | Herramienta de Infraestructura como Código (IaC) para provisionar recursos. | `terraform init`<br>`terraform apply` | [Documentación](https://developer.hashicorp.com/terraform/docs) |
+| **Ansible** | Automatización de configuración de servidores y despliegue de software. | `ansible-playbook <playbook.yml>` | [Documentación](https://docs.ansible.com/) |
+| **Kubectl & Helm** | **Kubectl** para gestionar clústeres de Kubernetes y **Helm** para empaquetar apps. | `kubectl get pods`<br`helm install <chart>` | [Kubectl](https://kubernetes.io/docs/reference/kubectl/)<br>[Helm](https://helm.sh/docs/) |
+| **AWS CLI & Azure CLI** | CLIs oficiales para gestionar recursos en Amazon Web Services y Microsoft Azure. | `aws s3 ls`<br>`az group list` | [AWS CLI](https://aws.amazon.com/cli/)<br>[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/) |
 
-### Tmux: Gestor de Sesiones de Terminal
-**Tmux** te permite tener múltiples ventanas y paneles en una sola terminal, y que estas persistan aunque te desconectes. Es indispensable para trabajar en servidores remotos o para organizar múltiples tareas.
+#### 5. Clientes de Bases de Datos
 
-*   **Comandos Esenciales:**
-    *   `tmux new -s <nombre_sesion>` - Inicia una nueva sesión con un nombre.
-    *   `tmux ls` - Lista las sesiones activas.
-    *   `tmux attach -t <nombre_sesion>` - Se conecta a una sesión existente.
-    *   Dentro de Tmux (usando el prefijo `Ctrl+b`):
-        *   `Ctrl+b` `d` - Se desconecta de la sesión (la deja corriendo en segundo plano).
-        *   `Ctrl+b` `c` - Crea una nueva ventana (como una pestaña de navegador).
-        *   `Ctrl+b` `w` - Muestra una lista de ventanas para navegar.
-        *   `Ctrl+b` `"` - Divide la ventana actual horizontalmente.
-        *   `Ctrl+b` `%` - Divide la ventana actual verticalmente.
-
-[➡️ Documentación de Tmux](https://github.com/tmux/tmux/wiki)
-
-### Navegación Rápida: Zoxide y FZF
-Olvídate de `cd` y el historial normal. **Zoxide** aprende tus directorios frecuentes y **FZF** potencia tu búsqueda.
-
-*   **Comandos Esenciales:**
-    *   `z <palabra_clave>` - Salta al directorio que mejor coincida con la palabra clave.
-    *   `zi <palabra_clave>` - Inicia una búsqueda interactiva (con FZF) para elegir a qué directorio saltar.
-    *   `Ctrl+R` - Activa la búsqueda "fuzzy" en tu historial de comandos.
-    *   `Ctrl+T` - Activa FZF para buscar un archivo o directorio y pegarlo en la línea de comandos.
-    *   `Alt+C` - Busca un directorio con FZF y se mueve a él instantáneamente.
-
-[➡️ Documentación de Zoxide](https://github.com/ajeetdsouza/zoxide) | [➡️ Documentación de FZF](https://github.com/junegunn/fzf)
-
-### Utilidades de Terminal Modernas: Bat y Eza
-Reemplazos para los comandos clásicos `cat` y `ls` que ofrecen una experiencia visualmente superior y más informativa.
-
-*   **Comandos Esenciales:**
-    *   `bat <archivo>` - Muestra el contenido de un archivo con resaltado de sintaxis y números de línea.
-    *   `eza` - El nuevo `ls`. Muestra los archivos con colores y de forma más limpia.
-    *   `eza -l --icons --git` - Vista larga, con iconos y estado de Git para cada archivo.
-    *   `eza --tree` - Muestra el contenido del directorio en formato de árbol.
-
-[➡️ Documentación de Bat](https://github.com/sharkdp/bat) | [➡️ Documentación de Eza](https://github.com/eza-community/eza)
-
-### Python y Ciencia de Datos: Gestión de Entornos
-La mejor práctica para proyectos de Python es usar entornos virtuales para aislar dependencias. Tu entorno está listo para ello.
-
-*   **Flujo de Trabajo Esencial:**
-    1.  `python3 -m venv .venv` - Crea un nuevo entorno virtual en una carpeta `.venv`.
-    2.  `source .venv/bin/activate` - Activa el entorno. Verás `(.venv)` en tu prompt.
-    3.  `pip install pandas numpy jupyterlab` - Instala las librerías que necesites dentro del entorno activo.
-    4.  `pip freeze > requirements.txt` - Guarda la lista de librerías en un archivo.
-    5.  `deactivate` - Desactiva el entorno y vuelve a la terminal normal.
-
-[➡️ Documentación de venv](https://docs.python.org/3/library/venv.html)
-
-### Infraestructura como Código: Terraform
-**Terraform** te permite definir y gestionar tu infraestructura de nube (en OCI, AWS, Azure, etc.) usando código.
-
-*   **Ciclo de Vida Básico:**
-    *   `terraform init` - Prepara tu directorio de trabajo, descargando los proveedores necesarios.
-    *   `terraform plan` - Muestra los cambios que se realizarán en tu infraestructura.
-    *   `terraform apply` - Aplica los cambios y crea los recursos.
-    *   `terraform destroy` - Destruye los recursos gestionados por Terraform.
-
-[➡️ Documentación de Terraform](https://developer.hashicorp.com/terraform/docs)
+| Herramienta | Descripción | Comandos Útiles | Documentación |
+| :--- | :--- | :--- | :--- |
+| **PostgreSQL Client** | Cliente `psql` para interactuar con bases de datos PostgreSQL. | `psql -h <host> -U <user>` | [Documentación](https://www.postgresql.org/docs/current/app-psql.html) |
+| **MySQL Client** | Cliente `mysql` para bases de datos MySQL y MariaDB. | `mysql -h <host> -u <user> -p` | [Documentación](https://dev.mysql.com/doc/refman/8.0/en/mysql.html) |
+| **Redis Tools** | Incluye `redis-cli` para interactuar con servidores Redis. | `redis-cli -h <host> ping` | [redis-cli](https://redis.io/docs/ui/cli/) |
+| **MongoDB Shell** | Shell interactiva `mongosh` para bases de datos MongoDB. | `mongosh "mongodb://<host>"` | [mongosh](https://www.mongodb.com/docs/mongodb-shell/) |
 
 ---
 
-## 🔧 Personalización
+### Filosofía y Audiencia
 
-La verdadera belleza de este proyecto es que es **tu** entorno. Para añadir una nueva herramienta, simplemente edita `setup_dev_tools.sh`. Para un nuevo alias, edita `.bashrc`. Después, guarda los cambios en tu repositorio con `git commit` y `git push`.
+Este proyecto nació de mi propia experiencia como economista en transición al mundo de la tecnología. El objetivo es ofrecer una solución a quienes, como yo, provienen de campos no tradicionales y desean un punto de partida sólido y sin complicaciones para su aprendizaje.
 
----
+Está dirigido a:
+*   **Estudiantes y autodidactas** que necesitan un entorno de desarrollo robusto sin el riesgo de alterar su sistema local.
+*   **Profesionales** que usan herramientas como Cloud Shell y quieren personalizarlas para ser más productivos.
+*   **Cualquiera** que valore un enfoque de "infraestructura como código" para su propio entorno de desarrollo.
 
-## 🤝 Contribuciones
+Este repositorio es mi forma de contribuir a la comunidad, con un agradecimiento especial a los creadores de herramientas de código abierto que hacen posible nuestro crecimiento.
 
-Las ideas y contribuciones para mejorar este proyecto son siempre bienvenidas. El flujo de trabajo es el estándar de GitHub: abre un **Issue** para discutir tu idea y luego envía un **Pull Request** con tus cambios.
+### Contribuciones
 
----
+Las críticas constructivas y las contribuciones son bienvenidas. Si tienes ideas para mejorar el entorno, detectas un error o quieres añadir una nueva herramienta, por favor, abre un **Issue** o un **Pull Request**.
 
-## 🙏 Agradecimientos
+### Licencia
 
-*   A **Oracle Next Generation (ONE)** por proporcionar la plataforma y el contexto de aprendizaje que inspiraron la creación de este proyecto.
-*   A la vasta **comunidad de software de código abierto**, sobre cuyos hombros se asienta cada una de las herramientas aquí presentes.
-*   Este entorno fue desarrollado en un proceso de colaboración con **Gemini**, el modelo de lenguaje grande de Google, demostrando un nuevo paradigma de desarrollo asistido por IA.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+Este proyecto se distribuye bajo la **Licencia MIT**.
