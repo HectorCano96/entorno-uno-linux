@@ -41,24 +41,34 @@ source ~/.bashrc
 
 ---
 
+### 📂 Estructura del Repositorio
+
+Para navegar este proyecto, es útil entender el propósito de cada archivo clave:
+
+*   `setup_dev_tools.sh`: Es el corazón del proyecto. Este script se encarga de instalar todas las herramientas de software, CLIs, y gestores de paquetes. Es el script principal que aprovisiona el entorno.
+*   `install.sh`: Este script se enfoca en la configuración del entorno de la terminal (shell). Crea enlaces simbólicos para archivos de configuración como `.bashrc`, permitiendo que tu terminal adopte la personalización definida en el repositorio.
+*   `.bashrc`: Es el archivo de configuración para la shell Bash. En este proyecto, está personalizado para cargar herramientas como Starship y NVM, y para definir alias y funciones que agilizan el flujo de trabajo.
+
+---
+
 ### 💡 Contexto y Objetivos del Proyecto
 
-Este proyecto nació de una necesidad personal. Viniendo de un campo no tecnológico como la economía, me enfrenté a la abrumadora tarea de configurar un entorno de desarrollo funcional. La curva de aprendizaje no solo incluía la programación, sino también la compleja selección y configuración de herramientas, la gestión de máquinas virtuales y el riesgo de alterar un sistema local.
+Este proyecto nació de una necesidad personal. Viniendo de una formación en **Economía**, un campo profundamente analítico, mi transición hacia la tecnología me presentó un desafío dual: no solo debía aprender a programar, sino también a construir y gestionar un entorno de desarrollo eficaz. Este repositorio es el resultado de esa jornada, consolidando el conocimiento adquirido en mi formación en **Ciencia de Datos** y, más recientemente, en el **Tech Advance Program de Oracle y Alura**, con un enfoque en **Oracle Cloud Infrastructure (OCI)**.
 
 "Entorno Uno" es la solución estructurada a ese problema. Es un sistema de aprovisionamiento personal que busca ofrecer un atajo a otros que se encuentren en una situación similar. 
 
 **El público objetivo es:**
-*   **Estudiantes y autodidactas** que necesitan un entorno robusto sin el riesgo de dañar su sistema local.
+*   **Estudiantes y autodidactas** que necesitan un entorno robusto sin el riesgo de alterar su sistema local.
 *   **Profesionales en transición de carrera** que desean familiarizarse con las herramientas estándar de la industria.
 *   **Desarrolladores experimentados** que valoran un enfoque de "infraestructura como código" para replicar su entorno de trabajo en cualquier máquina.
-
-> Este repositorio es también una forma de agradecer y contribuir a la comunidad de código abierto, cuyo trabajo colectivo hace posible el desarrollo tecnológico actual.
 
 ---
 
 ### 🧰 La Caja de Herramientas: Guía Detallada de Uso
 
 A continuación se presenta un desglose detallado de las herramientas instaladas, su propósito y cómo empezar a utilizarlas.
+
+(El resto de la guía de herramientas permanece igual...)
 
 ## I. Productividad en la Terminal
 
@@ -166,9 +176,26 @@ Herramientas para la automatización, despliegue y gestión de infraestructura m
 
 ---
 
-### 🤝 Contribuciones
+### 🔬 Notas Adicionales
+
+#### Sobre la Creación de este Proyecto
+
+Es importante mencionar que este proyecto ha sido desarrollado con el considerable apoyo de herramientas de IA generativa como **Gemini**. Este enfoque ha permitido acelerar el desarrollo y la investigación. Esto también implica que estoy en un proceso de aprendizaje continuo sobre los detalles más finos del código y la interacción entre componentes. La estructura y funcionalidad son sólidas, pero el estudio y la mejora son una constante.
+
+#### Validación y Compatibilidad
+
+*   Se han dedicado múltiples horas de prueba para validar que el entorno se despliega y funciona correctamente en **Google Cloud Shell**, que se basa en Debian.
+*   Aunque el objetivo es que sea lo más universal posible, podrían existir detalles o errores al ejecutar los scripts en distribuciones de Linux o versiones diferentes. La colaboración para identificar y resolver estos problemas es muy bienvenida.
+
+---
+
+### 🤝 Contribuciones y Contacto
 
 Este es un proyecto en constante evolución. Las contribuciones y sugerencias son bienvenidas. Si tienes una idea para mejorar el entorno o encuentras un error, por favor, abre un **Issue** o un **Pull Request**.
+
+Para un contacto más directo, puedes encontrarme en:
+*   **Discord:** `hcano.109`
+*   **Email:** `[tu-correo-electronico@ejemplo.com]` (Por favor, reemplaza esto con tu email real)
 
 ### 📜 Licencia
 
