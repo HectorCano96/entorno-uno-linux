@@ -53,8 +53,10 @@ fi
 if ! command -v kubectl &> /dev/null; then
     echo "Agregando repositorio de Kubernetes (kubectl)..."
     sudo apt-get install -y apt-transport-https ca-certificates curl
-    sudo curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.29/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.29/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+    # Se obtiene la última versión estable de k8s dinámicamente.
+    K8S_STABLE_VERSION=$(curl -L -s https://dl.k8s.io/release/stable.txt)
+    sudo curl -fsSL "https://pkgs.k8s.io/core:/stable:/${K8S_STABLE_VERSION}/deb/Release.key" | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/${K8S_STABLE_VERSION}/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 fi
 
 # --- Parte 2: Instalación de Paquetes APT ---
@@ -95,14 +97,17 @@ fi
 # ctop
 if ! command -v ctop &> /dev/null; then
     echo "Instalando ctop..."
-    sudo wget https://github.com/bcicen/ctop/releases/download/v0.7.7/ctop-0.7.7-linux-amd64 -O /usr/local/bin/ctop
+    # Se obtiene la última versión desde la API de GitHub.
+    CTOP_LATEST_URL=$(curl -sL "https://api.github.com/repos/bcicen/ctop/releases/latest" | jq -r '.assets[] | select(.name | endswith("linux-amd64")) | .browser_download_url')
+    sudo wget "$CTOP_LATEST_URL" -O /usr/local/bin/ctop
     sudo chmod +x /usr/local/bin/ctop
 fi
 
 # dive
 if ! command -v dive &> /dev/null; then
     echo "Instalando dive..."
-    DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    # Se usa jq para extraer y limpiar el número de versión de forma robusta.
+    DIVE_VERSION=$(curl -sL "https://api.github.com/repos/wagoodman/dive/releases/latest" | jq -r '.tag_name | sub("v"; "")')
     curl -L -o dive.deb "https://github.com/wagoodman/dive/releases/latest/download/dive_${DIVE_VERSION}_linux_amd64.deb"
     sudo apt install -y ./dive.deb
     rm dive.deb
@@ -136,4 +141,3 @@ nvm use --lts
 nvm alias default lts/*
 
 echo "Configuración del entorno de desarrollo finalizada."
-
