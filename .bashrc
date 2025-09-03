@@ -103,7 +103,7 @@ SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 setup_script_path="$SCRIPT_DIR/setup_dev_tools.sh"
 # --- FIN: Lógica robusta ---
 
-ENTORNO_UNO_LOCK_FILE="$HOME/.entorno-uno-instalado"
+ENTORNO_UNO_LOCK_FILE="/tmp/entorno-uno-instalado.${USER}"
 if [ ! -f "$ENTORNO_UNO_LOCK_FILE" ]; then
     echo "Entorno de desarrollo no detectado. Ejecutando configuración única..."
     echo "Esto puede tardar varios minutos. Las futuras terminales iniciarán al instante."
@@ -113,7 +113,7 @@ if [ ! -f "$ENTORNO_UNO_LOCK_FILE" ]; then
         if bash "$setup_script_path"; then
             touch "$ENTORNO_UNO_LOCK_FILE"
             echo "Instalación completada y bandera creada en '$ENTORNO_UNO_LOCK_FILE'."
-            echo "Para forzar una reinstalación o reparación, borra ese archivo y abre una nueva terminal."
+            echo "Esta bandera es temporal y se eliminará al reciclar la VM, disparando una nueva instalación."
         else
             echo "ADVERTENCIA: El script de instalación falló. La bandera no se creará." >&2
         fi
