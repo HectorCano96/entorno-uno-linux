@@ -113,7 +113,8 @@ if [ ! -f "$ENTORNO_UNO_LOCK_FILE" ]; then
         if bash "$setup_script_path"; then
             touch "$ENTORNO_UNO_LOCK_FILE"
             echo "Instalación completada y bandera creada en '$ENTORNO_UNO_LOCK_FILE'."
-            echo "Esta bandera es temporal y se eliminará al reciclar la VM, disparando una nueva instalación."
+            echo "Nota: La bandera es temporal. En Cloud Shell, se borra al reciclar la VM, permitiendo la auto-reparación."
+            echo "En sistemas persistentes, para forzar una reparación manual, ejecute de nuevo 'setup_dev_tools.sh'."
         else
             echo "ADVERTENCIA: El script de instalación falló. La bandera no se creará." >&2
         fi
