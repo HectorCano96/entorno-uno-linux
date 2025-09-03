@@ -39,6 +39,21 @@ cd ~/entorno-uno-linux
 source ~/.bashrc
 ```
 
+#### Nota sobre Entornos Efímeros y Reparación Manual
+
+Este script está optimizado para **entornos efímeros** como Google Cloud Shell. Utiliza un archivo de control temporal (`/tmp/entorno-uno-instalado...`) para verificar la instalación.
+
+*   **En Cloud Shell:** Si tu máquina virtual se recicla, este archivo de control se elimina automáticamente, y el entorno se reinstalará la próxima vez que inicies la terminal, asegurando que todo funcione siempre.
+*   **En Sistemas Linux Persistentes (ej. un servidor o tu PC):** El archivo de control solo se eliminará al reiniciar el sistema. Si necesitas forzar una reinstalación o reparar una herramienta que borraste manualmente, el script no lo hará automáticamente en cada nueva terminal.
+
+Para forzar la reparación manual en cualquier sistema, simplemente vuelve a ejecutar el script de instalación de herramientas. Al ser idempotente, solo instalará lo que falte:
+
+```bash
+# Navega a la carpeta del proyecto y ejecuta el script de configuración
+cd ~/entorno-uno-linux
+bash setup_dev_tools.sh
+```
+
 ---
 
 ### 📂 Estructura del Repositorio
