@@ -127,7 +127,7 @@ Herramientas diseñadas para hacer tu experiencia en la línea de comandos más 
 *   **Documentación Oficial:** [fzf GitHub](https://github.com/junegunn/fzf)
 
 ### 🦇 bat
-*   **¿Qué es?** Un reemplazo moderno del comando `cat`.
+*   **¿Qué es?** Un reemplazo moderno del comando `cat`. En este entorno, `bat` es un alias que hemos configurado para `batcat`, que es el nombre real del programa.
 *   **¿Por qué está aquí?** `cat` simplemente vuelca el contenido de un archivo a la terminal. `bat` hace lo mismo pero con resaltado de sintaxis según el lenguaje, numeración de líneas e integración con Git para mostrar qué líneas han cambiado. Hace que revisar archivos desde la terminal sea mucho más legible.
 *   **Guía de Uso Práctico:**
     *   `bat mi_archivo.py`: Muestra el contenido de un archivo Python con colores y formato.
