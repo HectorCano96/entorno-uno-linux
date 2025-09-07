@@ -21,14 +21,15 @@ echo "Preparando el sistema base..."
 mkdir -p "$HOME/.cloudshell"
 touch "$HOME/.cloudshell/no-apt-get-warning"
 
-# Restaura el sistema a su estado completo si no se ha hecho antes
-if [ ! -f "$HOME/.unminimize_complete" ]; then
-    echo "Restaurando paquetes y documentación del sistema (operación única)..."
+# Restaura el sistema a su estado completo si no se ha hecho en esta sesión
+UNMINIMIZE_FLAG="/tmp/.unminimize_complete.$(whoami)"
+if [ ! -f "$UNMINIMIZE_FLAG" ]; then
+    echo "Restaurando paquetes y documentación del sistema (operación única para esta sesión)..."
     DEBIAN_FRONTEND=noninteractive sudo unminimize -f
     echo "Sistema restaurado."
-    touch "$HOME/.unminimize_complete"
+    touch "$UNMINIMIZE_FLAG"
 else
-    echo "El sistema ya está completo. Omitiendo."
+    echo "El sistema ya fue restaurado en esta sesión. Omitiendo."
 fi
 
 # --- Parte 1: Configuración de Repositorios Externos ---
