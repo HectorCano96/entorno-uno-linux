@@ -25,7 +25,7 @@ touch "$HOME/.cloudshell/no-apt-get-warning"
 UNMINIMIZE_FLAG="/tmp/.unminimize_complete.$(whoami)"
 if [ ! -f "$UNMINIMIZE_FLAG" ]; then
     echo "Restaurando paquetes y documentación del sistema (operación única para esta sesión)..."
-    DEBIAN_FRONTEND=noninteractive sudo unminimize -f
+    yes | DEBIAN_FRONTEND=noninteractive sudo unminimize -f
     echo "Sistema restaurado."
     touch "$UNMINIMIZE_FLAG"
 else
@@ -83,7 +83,7 @@ echo "Instalando herramientas adicionales (CLIs de Cloud y otros)..."
 # Azure CLI
 if ! command -v az &> /dev/null; then
     echo "Instalando Azure CLI..."
-    curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+    curl -sL https://aka.ms/InstallAzureCLIDeb | DEBIAN_FRONTEND=noninteractive sudo bash
 fi
 
 # AWS CLI
