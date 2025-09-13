@@ -41,7 +41,7 @@ source ~/.bashrc
 
 #### Nota sobre Entornos Efímeros y Reparación Manual
 
-Este script está optimizado para **entornos efímeros** como Google Cloud Shell. Utiliza un archivo de control temporal (`/tmp/entorno-uno-instalado...`) para verificar la instalación.
+Este script está optimizado para **entornos efímeros** como Google Cloud Shell. Utiliza **dos archivos de control temporales** para gestionar operaciones que solo deben ejecutarse una vez por sesión: uno para la restauración del sistema con `unminimize` (`/tmp/.unminimize_complete...`) y otro para la instalación principal de herramientas (`/tmp/entorno-uno-instalado...`).
 
 *   **En Cloud Shell:** Si tu máquina virtual se recicla, este archivo de control se elimina automáticamente, y el entorno se reinstalará la próxima vez que inicies la terminal, asegurando que todo funcione siempre.
 *   **En Sistemas Linux Persistentes (ej. un servidor o tu PC):** El archivo de control solo se eliminará al reiniciar el sistema. Si necesitas forzar una reinstalación o reparar una herramienta que borraste manualmente, el script no lo hará automáticamente en cada nueva terminal.
@@ -204,6 +204,8 @@ Es importante mencionar que este proyecto ha sido desarrollado con el considerab
 
 *   Se han dedicado múltiples horas de prueba para validar que el entorno se despliega y funciona correctamente en **Google Cloud Shell**, que se basa en Debian.
 *   Aunque el objetivo es que sea lo más universal posible, podrían existir detalles o errores al ejecutar los scripts en distribuciones de Linux o versiones diferentes. La colaboración para identificar y resolver estos problemas es muy bienvenida.
+*   **Manejo de Bloqueos de `apt`**: Se ha detectado que las VMs de Cloud Shell a menudo ejecutan una actualización automática en segundo plano al iniciar, lo que puede bloquear el gestor de paquetes `apt`. Para solucionar esto, el script `setup_dev_tools.sh` ahora incluye un **bucle de espera** que verifica si `apt` está ocupado y espera a que se libere antes de continuar.
+*   **Compatibilidad con `unminimize`**: En imágenes recientes de Cloud Shell, el comando `unminimize` falla porque el archivo `/etc/dpkg/dpkg.cfg.d/excludes` no existe. El script ahora crea este archivo de forma proactiva para garantizar la compatibilidad.
 
 ---
 
