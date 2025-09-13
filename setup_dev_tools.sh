@@ -25,6 +25,13 @@ touch "$HOME/.cloudshell/no-apt-get-warning"
 UNMINIMIZE_FLAG="/tmp/.unminimize_complete.$(whoami)"
 if [ ! -f "$UNMINIMIZE_FLAG" ]; then
     echo "Restaurando paquetes y documentación del sistema (operación única para esta sesión)..."
+
+    # Preparamos el terreno para 'unminimize' creando el archivo que espera.
+    # Esto es para compatibilidad con imágenes de SO más nuevas donde este archivo no existe.
+    echo "Creando archivo de compatibilidad para unminimize..."
+    sudo mkdir -p /etc/dpkg/dpkg.cfg.d
+    sudo touch /etc/dpkg/dpkg.cfg.d/excludes
+
     yes | DEBIAN_FRONTEND=noninteractive sudo unminimize -f
     echo "Sistema restaurado."
     touch "$UNMINIMIZE_FLAG"
