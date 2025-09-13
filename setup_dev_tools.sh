@@ -69,7 +69,19 @@ fi
 
 # --- Parte 2: Instalación de Paquetes APT ---
 echo "Actualizando e instalando paquetes base vía APT..."
+
+# Bucle de espera para el bloqueo de APT/DPKG
+echo "Verificando si el gestor de paquetes (apt/dpkg) está ocupado por otro proceso..."
+while sudo fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 || \
+      sudo fuser /var/lib/apt/lists/lock >/dev/null 2>&1 || \
+      sudo fuser /var/cache/apt/archives/lock >/dev/null 2>&1; do
+   echo "El gestor de paquetes está ocupado. Esperando 5 segundos para reintentar..."
+   sleep 5
+done
+echo "El gestor de paquetes está libre. Continuando con la actualización."
+
 sudo apt-get update
+
 
 # Paquetes estándar
 sudo apt-get install -y \
